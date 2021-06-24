@@ -6,3 +6,14 @@ CREATE TABLE users (
     created timestamp NOT NULL,
     PRIMARY KEY (Id)
 );
+
+CREATE TABLE public.comments
+(
+    "commentID" uuid NOT NULL,
+    "creatorID" character NOT NULL,
+    "startIndex" integer NOT NULL,
+    "endingIndex" integer NOT NULL,
+    "documentID" integer NOT NULL,
+    "createdAt" timestamp without time zone NOT NULL,
+    PRIMARY KEY ("commentID")
+);
