@@ -199,35 +199,18 @@ services:
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
       KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'
   
-  # dynamodb:
-  #   image: amazon/dynamodb-local
-  #   hostname: dynamodb-local
-  #   container_name: dynamodb-local
-  #   command: -jar DynamoDBLocal.jar -sharedDb
-  #   ports:
-  #     - "8042:8000"
-  
-
   localstack: # local copy of aws, access at http://localhost:4566/health 
-    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
     image: localstack/localstack
-    network_mode: bridge
+    container_name: localstack_demo
     ports:
-      - "53:53"
-      - "53:53/udp"
-      - "443:443"
-      - "4566:4566"
-      - "4571:4571"
-      - "8080:8080"
+      - '4563-4599:4563-4599'
+      - '8055:8080'
     environment:
-      - SERVICES=s3,dynamodb # declare service here
-      - DEBUG=${DEBUG- }
-      - DATA_DIR=${DATA_DIR- }
-      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
-      - LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY- }
-      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - HOST_TMP_FOLDER=${TMPDIR}
+      - SERVICES=s3,dynamodb
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - AWS_REGION=us-west-2
     volumes:
-      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - './.localstack:/tmp/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+  

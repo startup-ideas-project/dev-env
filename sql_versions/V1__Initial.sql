@@ -7,13 +7,13 @@ CREATE TABLE users (
     PRIMARY KEY (Id)
 );
 
-CREATE TABLE public.comments
+CREATE TABLE comments
 (
-    "commentID" uuid NOT NULL,
-    "creatorID" character NOT NULL,
-    "startIndex" integer NOT NULL,
-    "endingIndex" integer NOT NULL,
-    "documentID" integer NOT NULL,
-    "createdAt" timestamp without time zone NOT NULL,
-    PRIMARY KEY ("commentID")
+    commentID uuid NOT NULL,
+    creatorID uuid NOT NULL,
+    startIndex integer NOT NULL,
+    endingIndex integer NOT NULL,
+    documentID uuid NOT NULL,
+    createdAt timestamp without time zone NOT NULL,
+    PRIMARY KEY (commentID)
 );
