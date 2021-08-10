@@ -17,3 +17,14 @@ CREATE TABLE comments
     createdAt timestamp without time zone NOT NULL,
     PRIMARY KEY (commentID)
 );
+
+CREATE TABLE comment_reviewers
+(
+    additionID uuid NOT NULL,
+    commentID uuid NOT NULL,
+    reviewerID uuid NOT NULL,
+    reviewerEmail character(100) NOT NULL,
+    CONSTRAINT comment_reviewers_pkey PRIMARY KEY (additionID),
+    CONSTRAINT fk_commentID FOREIGN KEY(commentID) 
+	  REFERENCES comments(commentID)
+)
